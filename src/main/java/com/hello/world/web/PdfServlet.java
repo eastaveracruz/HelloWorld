@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 @WebServlet("/pdf")
 public class PdfServlet extends HttpServlet {
@@ -22,8 +21,8 @@ public class PdfServlet extends HttpServlet {
                 default: req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req,resp);
             }
         } catch (Exception e){
-           resp.sendRedirect("https://metanit.com/java/javaee/4.4.php");
-//           resp.sendRedirect("javacours/pdf?action=0");
+//           resp.sendRedirect("https://metanit.com/java/javaee/4.4.php");
+           resp.sendRedirect("javacours/pdf?action=0");
         }
 
     }
