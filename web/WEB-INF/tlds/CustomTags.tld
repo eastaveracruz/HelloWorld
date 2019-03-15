@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.1</jspversion>
+    <shortname>CustomTags</shortname>
+    <info>Some Custom tags for DB 4 Testers</info>
+    <tag>
+        <name>DisplayGamesList</name>
+        <tagclass>test.training.tags.DisplayGamesList</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>Custom tag used to display the games list</info>
+        <attribute>
+            <name>gamesList</name>
+            <required>false</required>
+        </attribute>
+    </tag>
+</taglib>
