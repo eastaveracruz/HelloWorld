@@ -1,99 +1,40 @@
 @CHARSET "UTF-8";
+
 body {
-	background-color:#E6FFB2;
-	overflow:auto;
+    background: blanchedalmond;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
-#page {
-	width:80%;
-	position:fixed;
-	right:10%;
-	background-color:#FFFFE0;
-	color:#244700;
-	border:5px outset #244700;
-	font-size:30px;
-	overflow:auto;
+li {
+    background: coral;
+    font-size: large;
+    margin-left: 10px;
+    text-indent: 5px;
 }
 
-.center{
-	vertical-align:center;
-	text-align:center;	
+table {
+    border: 1px solid;
+    border-color: black;
 }
 
-
-#statusline{
-	/*height:80px;*/
-	font-size:25px;
+.odd {
+    background-color: green;
 }
 
-#statusline table {
-	width:100%;
-	padding-top:30px;
-	padding-bottom:20px;
-	float:center;
-	/*table-layout:auto;
-	border: 1px dotted black;*/
+.last {
+    background-color: red;
 }
 
-#body{
-	width:100%;
-	height:300px;
-	text-align:center;
+.films {
 }
 
-#gamefield{
-	width:60%;
-	height:100%;
-	float:left;
-
+.books {
 }
 
-#form{
-	position:fixed;
-	left:20%;
-	/*width:80%;*/
-	padding-top:30px;
-	text-align:left;
-	font-size:20px;	
-	border: 1px dotted black;
-}
-
-#results{
-	width:40%;
-	height:100%;
-	float:right;
-	/*text-align:center;*/
-	/*border: 1px dashed black;*/
-	overflow:auto;
-}
-
-#statistics{
-	
-	height:60px;
-	font-size:20px;
-}
-
-
-#results table{
-	table-layout:auto;
-	/*border:3px dashed #32CD32;*/
-	background-color:#8EB98E;
-	float:center;
-	border-collapse:collapse;
-}
-
-#results td, th{
-	padding-left:10px;
-	padding-right:10px;
-	color:#080C00;
-	font-size:15px;
-}
-
-
-#results tr.stat1{
-	background-color:#7ACC29;
-}
-
-#results tr.stat2{
-	background-color:#A2DB69;
+/*TODO copy-paste*/
+#user{
+    display:block;
+    float: right;
+    margin-right: 30%;
 }

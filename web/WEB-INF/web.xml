@@ -1,43 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>TheGame</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>home.jsp</welcome-file>
-  </welcome-file-list>
-  <!--<servlet>-->
-    <!--<description>types status message on header</description>-->
-    <!--<display-name>Status</display-name>-->
-    <!--<servlet-name>Status</servlet-name>-->
-    <!--<servlet-class>msg.Status</servlet-class>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>Status</servlet-name>-->
-    <!--<url-pattern>/Status</url-pattern>-->
-  <!--</servlet-mapping>-->
-  <!--<servlet>-->
-    <!--<description></description>-->
-    <!--<display-name>Result</display-name>-->
-    <!--<servlet-name>Result</servlet-name>-->
-    <!--<servlet-class>logic.Result</servlet-class>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>Result</servlet-name>-->
-    <!--<url-pattern>/Result</url-pattern>-->
-  <!--</servlet-mapping>-->
-  <servlet>
-    <description></description>
-    <display-name>game</display-name>
-    <servlet-name>game</servlet-name>
-    <servlet-class>control.game</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>game</servlet-name>
-    <url-pattern>/game</url-pattern>
-  </servlet-mapping>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <servlet-name>Films</servlet-name>
+        <servlet-class>edu.films.controller.FilmsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Films</servlet-name>
+        <url-pattern>films</url-pattern>
+    </servlet-mapping>
+
+    <!--<error-page>-->
+        <!--<exception-type>java.lang.Exception</exception-type>-->
+        <!--<location>/v0/error.jsp</location>-->
+    <!--</error-page>-->
+
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/error404.html</location>-->
+    <!--</error-page>-->
+
+    <error-page>
+        <error-code>405</error-code>
+        <location>/error405.html</location>
+    </error-page>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+
+    <!-- part 2 -->
+
+    <listener>
+        <listener-class>edu.films.web.ProjectRegistry</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Books</servlet-name>
+        <servlet-class>edu.films.controller.BooksServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Books</servlet-name>
+        <url-pattern>books</url-pattern>
+    </servlet-mapping>
+
+    <!-- diff error pages -->
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/jsp/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error404.jsp</location>
+    </error-page>
+
+
+
 </web-app>
