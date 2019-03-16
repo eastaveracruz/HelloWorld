@@ -1,83 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>db4Testers</display-name>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+  <display-name>FavoriteFilms</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>login.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>test.training.login.LoginServlet</servlet-class>
+    <display-name>FilmsServlet</display-name>
+    <servlet-name>FilmsServlet</servlet-name>
+    <servlet-class>web.FilmsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>UserProfile</display-name>
-    <servlet-name>UserProfile</servlet-name>
-    <servlet-class>test.training.user.UserProfile</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserProfile</servlet-name>
-    <url-pattern>/UserProfile</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DownloadTask</display-name>
-    <servlet-name>DownloadTask</servlet-name>
-    <servlet-class>test.training.dowload.DownloadTask</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DownloadTask</servlet-name>
-    <url-pattern>/global/DownloadTask</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Games</display-name>
-    <servlet-name>Games</servlet-name>
-    <servlet-class>test.training.games.Games</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Games</servlet-name>
-    <url-pattern>/Games</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FindGames</display-name>
-    <servlet-name>FindGames</servlet-name>
-    <servlet-class>test.training.games.FindGames</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FindGames</servlet-name>
-    <url-pattern>/global/gadgets/FindGames</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddNewGame</display-name>
-    <servlet-name>AddNewGame</servlet-name>
-    <servlet-class>test.training.games.AddNewGame</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddNewGame</servlet-name>
-    <url-pattern>/global/gadgets/AddNewGame</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>test</display-name>
-    <servlet-name>test</servlet-name>
-    <servlet-class>test.training.games.test</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>test</servlet-name>
-    <url-pattern>/test</url-pattern>
+    <servlet-name>FilmsServlet</servlet-name>
+    <url-pattern>/FilmsServlet</url-pattern>
   </servlet-mapping>
 </web-app>
