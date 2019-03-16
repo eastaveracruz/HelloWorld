@@ -15,7 +15,7 @@
     <div id="statusline">
     	<table>
     	<tr>
-    	<td class="center"><img src="resouces/human.jpg" alt="Adam" width="120px" height="100px"></td>
+    	<td class="center"><img src="resouces/human.jpg" alt="Adam" style="width: 200px"></td>
     	<td class="center">
 			<% if(request.getAttribute("winner") == null){
 					out.print("VS");
@@ -28,7 +28,7 @@
 				<% }
 			%>
 		</td>
-		<td class="center"><img src="resouces/android.jpg" alt="Android" width="100px" height="100px"></td>
+		<td class="center"><img src="resouces/android.jpg" alt="Android" style="width: 200px"></td>
 		</tr>
 		</table>
     </div>

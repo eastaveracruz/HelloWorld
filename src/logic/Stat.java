@@ -52,10 +52,6 @@ public class Stat {
         }
         humanWins = (humanScore / playedGames) * 100;
         robotWins = (robotScore / playedGames) * 100;
-        System.out.println(playedGames);
-        System.out.println(humanScore);
-        System.out.println(robotScore);
-        System.out.println();
     }
 
     public float getHumanWins() {
