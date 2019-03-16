@@ -33,4 +33,8 @@ public class Dao {
         return filmsList.stream().filter(f -> f.getTitle().contains(title)).collect(Collectors.toList());
     }
 
+    public boolean add(Film film){
+        return filmsList.add(film);
+    }
+
 }

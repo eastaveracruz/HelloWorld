@@ -6,6 +6,7 @@
 </head>
 <body style="position: relative; background-image: url(./img/108.png);">
 <div id="wrapper" style="position:absolute; width:60%; margin-left: 20%; background-color: white; padding: 30px">
+    <a href="FilmsServlet?action=add" style="color: indianred">ADD NEW FILMS</a>
     <div align="center">
         <form action="FilmsServlet" method="get">
             <label for="serchText" style="font-family: Arial">Search by Title</label>

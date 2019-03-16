@@ -11,7 +11,8 @@
 </head>
 <body>
 <div align="center">
-    <a href="FilmsServlet?action=list">FILMS LIST</a>
+    <a href="FilmsServlet?action=list">FILMS LIST</a><br>
+    <a href="FilmsServlet?action=add">ADD NEW FILMS</a>
 </div>
 </body>
 </html>

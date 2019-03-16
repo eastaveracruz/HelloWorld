@@ -1,6 +1,7 @@
 package web;
 
 import dao.Dao;
+import entity.Film;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,17 @@ public class FilmsServlet extends HttpServlet {
         String action = req.getParameter("action");
         switch (action){
             case "list": getAllFilms(req, resp); break;
+            case "add": req.getRequestDispatcher("WEB-INF/pages/add.jsp").forward(req, resp); break;
             default: search(action, req, resp);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String title = (String) req.getParameter("title");
+        String description = (String) req.getParameter("description");
+        dao.add(new Film(title, description));
+        req.getRequestDispatcher("WEB-INF/pages/add.jsp").forward(req, resp);
     }
 
     private void getAllFilms(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
