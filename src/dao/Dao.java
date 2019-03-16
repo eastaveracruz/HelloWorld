@@ -4,6 +4,7 @@ import entity.Film;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Dao {
 
@@ -28,8 +29,8 @@ public class Dao {
         return filmsList;
     }
 
-    public Film getByTitle(String title) {
-        return filmsList.stream().filter(f -> f.getTitle().equals(title)).findFirst().get();
+    public List<Film> getByTitle(String title) {
+        return filmsList.stream().filter(f -> f.getTitle().contains(title)).collect(Collectors.toList());
     }
 
 }
