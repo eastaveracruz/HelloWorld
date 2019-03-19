@@ -1,8 +1,5 @@
 package edu.films.model;
 
-/**
- *
- */
 public class RatedBook {
     Book book;
     String rating;

@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Films</servlet-name>
-        <url-pattern>films</url-pattern>
+        <url-pattern>/films</url-pattern>
     </servlet-mapping>
 
     <!--<error-page>-->
@@ -46,7 +46,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Books</servlet-name>
-        <url-pattern>books</url-pattern>
+        <url-pattern>/books</url-pattern>
     </servlet-mapping>
 
     <!-- diff error pages -->

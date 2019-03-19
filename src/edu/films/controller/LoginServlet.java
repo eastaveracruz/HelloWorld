@@ -18,7 +18,7 @@ import static edu.films.controller.WEB_CONSTANTS.ALLOWABLE_ACTION;
  *
  */
 //TODO extract const
-@WebServlet("login")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     @Override

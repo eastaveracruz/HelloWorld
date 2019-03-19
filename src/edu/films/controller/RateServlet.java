@@ -13,15 +13,18 @@ import java.io.IOException;
 /**
  *
  */
-@WebServlet("rate")
+@WebServlet("/rate")
 public class RateServlet extends HttpServlet {
 
     private RatingService ratingService = RatingService.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
         //TODO NPE
-        String id = req.getParameter("id").replace("\t","");
+        String act = req.getParameter("action");
+        String id = req.getParameter("id").replace("\t", "");
         String rating = req.getParameter("rating");
 
         String action = getRedirectAction(req, WEB_CONSTANTS.ACTION_MAIN);
@@ -29,7 +32,16 @@ public class RateServlet extends HttpServlet {
         Object currentUser = req.getSession().getAttribute("currentUser");
         // TODO if not user
 
-        boolean result = ratingService.rateBook((User)currentUser, id, rating);
+        boolean result = false;
+        switch (act) {
+            case "films":
+                result = ratingService.rateFilm((User) currentUser, id, rating);
+                break;
+            case "books":
+                result = ratingService.rateBook((User) currentUser, id, rating);
+                break;
+        }
+
         String fullAction = action + (result ? "" : "?message='error happened'");
         resp.sendRedirect(fullAction);
     }
