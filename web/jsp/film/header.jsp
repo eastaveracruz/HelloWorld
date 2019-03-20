@@ -5,12 +5,13 @@
 </head>
 <body style="position: relative; background-image: url(./resources/films_img/108.png);">
 <div id="header" style=" width:60%; margin-left: 20%; background-color: white; padding: 30px; margin-bottom: 30px">
-    <a href="FilmsServlet?action=add" style="color: indianred">ADD NEW FILMS</a><br>
+    <a href="films?action=add" style="color: indianred">ADD NEW FILMS</a><br>
     <a href="index.html" style="color: indianred">BACK TO MAIN</a>
     <div align="right">
-        <form action="FilmsServlet" method="get">
+        <form action="films" method="get">
             <label for="serchText" style="font-family: Arial">Search by Title</label>
-            <input type="text" name="action" id="serchText">
+            <input type="text" name="search" id="serchText">
+            <input type="hidden" name="action" value="search">
             <button type="submit">Search</button>
         </form>
     </div>

@@ -5,9 +5,11 @@
 </head>
 <body>
 <div align="center">
-    <a href="FilmsServlet?action=list" style="color: indianred">FILMS LIST</a><br>
+    <a href="films" style="color: indianred">FILMS LIST</a><br>
     <h2 style="font-family: Arial; font-size: 20px">Add Film</h2>
-    <form action="FilmsServlet" method="post">
+    <form action="films" method="post"
+          <%--enctype="multipart/form-data"--%>
+    >
         <table>
             <tr>
                 <td><label for="title">Title</label></td>

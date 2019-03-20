@@ -1,6 +1,6 @@
 package edu.films.model;
 
-public class Film {
+public class Film implements Comparable<Film>{
     private int id;
     private String title;
     private String img;
@@ -70,5 +70,10 @@ public class Film {
                 ", img='" + img + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Film o) {
+        return this.getTitle().toLowerCase().compareTo(o.getTitle().toLowerCase());
     }
 }
