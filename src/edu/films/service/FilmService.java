@@ -15,7 +15,7 @@ public class FilmService {
 
     private static List<Film> filmsList;
 
-    public static FilmService getInstance(){
+    public static FilmService getInstance() {
         return instance;
     }
 
@@ -49,9 +49,9 @@ public class FilmService {
 
 
     public boolean add(Film film) {
-        boolean b = filmsList.add(film);
-        filmsList = filmsList.stream().sorted().collect(Collectors.toList());
-        return b;
+        filmsList.add(film);
+        filmsList.stream().sorted().collect(Collectors.toList());
+        return true;
     }
 
     public List<RatedFilm> getRatedFilm(User user) {

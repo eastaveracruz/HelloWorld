@@ -76,23 +76,18 @@ public class FilmsServlet extends HttpServlet {
         String oldFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         String webPass = "." + UPLOAD_DIR + "/" + oldFileName;
         File folder = new File(getServletContext().getRealPath(webPass));
-
         try {
-
             if (!folder.exists()) {
                 folder.getParentFile().mkdir();
                 System.out.println(folder.createNewFile());
             }
-
             InputStream fileContent = filePart.getInputStream();
             OutputStream writer = new FileOutputStream(folder);
-
             byte[] bytes = new byte[1024];
             while (fileContent.available() > 0) {
                 int count = fileContent.read(bytes);
                 writer.write(bytes, 0, count);
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -102,7 +97,6 @@ public class FilmsServlet extends HttpServlet {
     }
 
     private void getAllFilms(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         List<RatedFilm> booksList;
         Object currentUser = req.getSession().getAttribute("currentUser");
         if (currentUser != null) {
@@ -124,7 +118,5 @@ public class FilmsServlet extends HttpServlet {
         }
         req.setAttribute("list", booksList);
         req.getRequestDispatcher("/jsp/films.jsp").forward(req, resp);
-
     }
-
 }
