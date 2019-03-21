@@ -4,20 +4,25 @@ import edu.films.model.Film;
 import edu.films.model.RatedFilm;
 import edu.films.model.User;
 import edu.films.service.FilmService;
-import org.apache.commons.fileupload.FileItem;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.Part;
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+
+import static edu.films.controller.WEB_CONSTANTS.UPLOAD_DIR;
 
 /**
  * Servlet implementation class FilmsServlet
  */
+
+@MultipartConfig
 public class FilmsServlet extends HttpServlet {
     //    private static final long serialVersionUID = 1L;
     private static final FilmService dao = new FilmService();
@@ -44,57 +49,56 @@ public class FilmsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = (String) req.getParameter("title");
-        String description = (String) req.getParameter("description");
+        String description = req.getParameter("description"); // Retrieves <input type="text" name="description">
 
-//        //проверяем является ли полученный запрос multipart/form-data
-//        boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-//        if (!isMultipart) {
-//            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-//            return;
-//        }
-////
-//        // Создаём класс фабрику
-//        DiskFileItemFactory factory = new DiskFileItemFactory();
-//
-//        // Максимальный буфера данных в байтах,
-//        // при его привышении данные начнут записываться на диск во временную директорию
-//        // устанавливаем один мегабайт
-//        factory.setSizeThreshold(1024*1024);
-//
-//        // устанавливаем временную директорию
-//        File tempDir = (File)getServletContext().getAttribute("javax.servlet.context.tempdir");
-//        factory.setRepository(tempDir);
-//
-//        //Создаём сам загрузчик
-//        ServletFileUpload upload = new ServletFileUpload(factory);
-//
-//        //максимальный размер данных который разрешено загружать в байтах
-//        //по умолчанию -1, без ограничений. Устанавливаем 10 мегабайт.
-//        upload.setSizeMax(1024 * 1024 * 10);
-//
-//        try {
-//            List items = upload.parseRequest(req);
-//            Iterator iter = items.iterator();
-//
-//            while (iter.hasNext()) {
-//                FileItem item = (FileItem) iter.next();
-//
-//                if (item.isFormField()) {
-//                    //если принимаемая часть данных является полем формы
-//                    processFormField(item);
-//                } else {
-//                    //в противном случае рассматриваем как файл
-//                    processUploadedFile(item);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//            return;
-//        }
+        //Загрузка файла
+        Part filePart = req.getPart("file"); // Retrieves <input type="file" name="file">
 
-        dao.add(new Film(title, description));
-        req.getRequestDispatcher("jsp/add.jsp").forward(req, resp);
+        if (nullCheck(title)) {
+            dao.add(new Film(title, description, fileUpload(filePart)));
+            req.getRequestDispatcher("jsp/add.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
+    }
+
+    private boolean nullCheck(String... args) {
+        for (String s : args) {
+            if (s == null || "".equals(s)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String fileUpload(Part filePart) {
+        //исходное имя файла
+        String oldFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        String webPass = "." + UPLOAD_DIR + "/" + oldFileName;
+        File folder = new File(getServletContext().getRealPath(webPass));
+
+        try {
+
+            if (!folder.exists()) {
+                folder.getParentFile().mkdir();
+                System.out.println(folder.createNewFile());
+            }
+
+            InputStream fileContent = filePart.getInputStream();
+            OutputStream writer = new FileOutputStream(folder);
+
+            byte[] bytes = new byte[1024];
+            while (fileContent.available() > 0) {
+                int count = fileContent.read(bytes);
+                writer.write(bytes, 0, count);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return webPass;
     }
 
     private void getAllFilms(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -106,13 +110,11 @@ public class FilmsServlet extends HttpServlet {
         } else {
             booksList = dao.getRatedFilm();
         }
-
         req.setAttribute("list", booksList);
         req.getRequestDispatcher("/jsp/films.jsp").forward(req, resp);
     }
 
     private void search(String title, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         List<RatedFilm> booksList;
         Object currentUser = req.getSession().getAttribute("currentUser");
         if (currentUser != null) {
@@ -123,37 +125,6 @@ public class FilmsServlet extends HttpServlet {
         req.setAttribute("list", booksList);
         req.getRequestDispatcher("/jsp/films.jsp").forward(req, resp);
 
-
-//        req.setAttribute("list", dao.getByTitle(title));
-//        req.getRequestDispatcher("/jsp/pages/films.jsp").forward(req, resp);
     }
 
-    /**
-     * Сохраняет файл на сервере, в папке upload.
-     * Сама папка должна быть уже создана.
-     *
-     * @param item
-     * @throws Exception
-     */
-    private void processUploadedFile(FileItem item) throws Exception {
-        File uploadetFile = null;
-        //выбираем файлу имя пока не найдём свободное
-        do{
-            String path = getServletContext().getRealPath("/upload/"+random.nextInt() + item.getName());
-            uploadetFile = new File(path);
-        }while(uploadetFile.exists());
-
-        //создаём файл
-        uploadetFile.createNewFile();
-        //записываем в него данные
-        item.write(uploadetFile);
-    }
-
-    /**
-     * Выводит на консоль имя параметра и значение
-     * @param item
-     */
-    private void processFormField(FileItem item) {
-        System.out.println(item.getFieldName()+"="+item.getString());
-    }
 }
