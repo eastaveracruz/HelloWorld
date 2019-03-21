@@ -1,24 +1,17 @@
 package edu.films.model;
 
-public class Film implements Comparable<Film>{
+public class Film implements Comparable<Film> {
     private int id;
     private String title;
     private String img;
     private String description;
+    private static int n = 100;
 
     public Film() {
     }
 
-    public Film(String title) {
-        this.title = title;
-    }
-
-    public Film(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
     public Film(String title, String description, String img) {
+        id = n++;
         this.title = title;
         this.img = img;
         this.description = description;
