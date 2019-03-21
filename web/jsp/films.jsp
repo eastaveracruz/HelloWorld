@@ -17,6 +17,9 @@
                     <h3 style="text-align: center; font-family: Arial">${film.title}</h3>
                     <div style="width: 500px; padding-left: 20px; padding-bottom: 40px; font-family: Arial">${film.description}</div>
                 </td>
+                <td valign="top" align="right" style="color: darkred; font-size: 15px">
+                    <a id="cross" href="films?action=delete&id=${film.id}">x</a>
+                </td>
             </tr>
             <tr>
                 <td>

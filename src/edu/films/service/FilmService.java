@@ -36,7 +36,7 @@ public class FilmService {
     }
 
     public List<Film> getAll() {
-        return filmsList;
+        return filmsList.stream().sorted().collect(Collectors.toList());
     }
 
     public List<RatedFilm> getByTitle(String title) {
@@ -49,9 +49,7 @@ public class FilmService {
 
 
     public boolean add(Film film) {
-        filmsList.add(film);
-        filmsList.stream().sorted().collect(Collectors.toList());
-        return true;
+        return  filmsList.add(film);
     }
 
     public List<RatedFilm> getRatedFilm(User user) {
@@ -69,4 +67,8 @@ public class FilmService {
         return first.orElseThrow(() -> new IllegalArgumentException("book not found with id " + bookId));
     }
 
+    public boolean delete(int id) {
+        Optional<Film> first = filmsList.stream().filter(film -> film.getId() == id).findFirst();
+        return filmsList.remove(first.orElse(new Film()));
+    }
 }

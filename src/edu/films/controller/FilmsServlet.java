@@ -33,14 +33,17 @@ public class FilmsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("action");
         act = act == null ? "" : act;
-        String search = req.getParameter("search");
         switch (act) {
             case "search":
+                String search = req.getParameter("search");
                 search(search, req, resp);
                 break;
             case "add":
                 req.getRequestDispatcher("jsp/add.jsp").forward(req, resp);
                 break;
+            case "delete":
+                int id = Integer.parseInt(req.getParameter("id"));
+                dao.delete(id);
             default:
                 getAllFilms(req, resp);
         }

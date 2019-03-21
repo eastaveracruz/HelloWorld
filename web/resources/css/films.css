@@ -25,3 +25,8 @@ body {
 #menu {
     margin-bottom: 30px;
 }
+
+#cross {
+    text-decoration: none;
+    color: darkred;
+}
