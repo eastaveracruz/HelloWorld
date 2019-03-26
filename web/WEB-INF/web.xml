@@ -61,6 +61,10 @@
         <location>/jsp/error404.jsp</location>
     </error-page>
 
-
+    <!--Path to init.properties-->
+    <context-param>
+        <param-name>initProperties</param-name>
+        <param-value>init.properties</param-value>
+    </context-param>
 
 </web-app>

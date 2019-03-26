@@ -8,6 +8,10 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 
@@ -35,14 +39,27 @@ public class ProjectRegistry implements ServletContextListener,
     // ServletContextListener implementation
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent event) {
-      /* This method is called when the servlet context is
-         initialized(when the Web application is deployed). 
-         You can initialize servlet context related data here.
+      /* Этот метод вызывается, когда контекст сервлета
+         инициализируется (при развертывании веб-приложения).
+         Вы можете инициализировать данные, связанные с контекстом сервлета, здесь.
       */
 
         String contextPath = event.getServletContext().getContextPath();
         log.info("Getting projectName form context. Project name is: " + contextPath);
         PROJECT_NAME = contextPath;
+
+        String path = event.getServletContext().getInitParameter("initProperties");
+        Properties properties = new Properties();
+        try(FileReader reader = new FileReader(event.getServletContext().getRealPath(path)))
+        {
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Enumeration<?> enumeration = properties.propertyNames();
+        for(String s: properties.stringPropertyNames()){
+            event.getServletContext().setAttribute(s, properties.getProperty(s));
+        }
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
